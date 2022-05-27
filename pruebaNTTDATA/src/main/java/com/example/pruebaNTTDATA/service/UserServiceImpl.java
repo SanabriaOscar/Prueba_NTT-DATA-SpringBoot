@@ -1,5 +1,6 @@
 package com.example.pruebaNTTDATA.service;
 
+import com.example.pruebaNTTDATA.exceptions.UserNotFoundException;
 import com.example.pruebaNTTDATA.model.User;
 import com.example.pruebaNTTDATA.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,9 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         userRepository.save(user);
+        return user;
     }
 
     @Override
@@ -32,6 +34,12 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public void deleteUser(int id) {
+        try {
+            userRepository.findById(id)
+                    .orElseThrow(() -> new UserNotFoundException(id));
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+        }
         userRepository.deleteById(id);
     }
 }
