@@ -1,5 +1,6 @@
 package com.example.pruebaNTTDATA.model;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +24,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(int id, String name, Date date) {
+    public Task(int id, String name) {
         this.id = id;
         this.name = name;
         this.date = date;
