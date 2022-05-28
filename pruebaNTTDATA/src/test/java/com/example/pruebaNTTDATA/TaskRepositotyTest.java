@@ -48,11 +48,11 @@ public class TaskRepositotyTest {
     }
     @Test
     public void ListAllTasks() {
-        List<Task> roles = new ArrayList();
-        roles.add(new Task());
-        given(taskRepository.findAll()).willReturn(roles);
+        List<Task> tasks = new ArrayList();
+        tasks.add(new Task());
+        given(taskRepository.findAll()).willReturn(tasks);
         List<Task> expected = taskService.listAllTasks();
-        assertEquals(expected, roles);
+        assertEquals(expected, tasks);
         verify(taskRepository).findAll();
     }
 
