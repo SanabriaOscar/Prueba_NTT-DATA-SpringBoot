@@ -1,10 +1,15 @@
 package com.example.pruebaNTTDATA.controller;
 
+import com.example.pruebaNTTDATA.exceptions.RecordAlreadyExits;
 import com.example.pruebaNTTDATA.model.User;
 import com.example.pruebaNTTDATA.service.UserServiceImpl;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -19,8 +24,22 @@ public class UserController {
     public List<User> listAllUserC(){
         return userService.listAllUsers();
     }
+    @GetMapping("/searchUser")
+    public ResponseEntity<?> searchUserC(@Param("filter") String filter) throws Exception {
+        try{
+            return ResponseEntity.status(HttpStatus.OK).body(userService.searchUser(filter));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \""
+                    +e.getMessage()+"\"}"));
+        }
+    }
+
     @PostMapping("/users/add")
     public String saveUserC(@RequestBody User user){
+        Optional<User> savedUser = Optional.ofNullable(userService.findByIdUser(user.getId()));
+        if(savedUser.isPresent()){
+            throw new RecordAlreadyExits("User already exist:" + user.getId());
+        }
         userService.saveUser(user);
         return "User saved sussesfull";
     }
