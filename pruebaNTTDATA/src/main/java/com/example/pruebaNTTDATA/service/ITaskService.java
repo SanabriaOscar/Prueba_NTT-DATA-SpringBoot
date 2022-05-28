@@ -9,5 +9,6 @@ public interface ITaskService {
  public Task saveTask(Task task);
  public Task findByIdTask(int id);
  public void deleteTask(int id);
+ List<Task> searchTask(String filter) ;
 
 }

@@ -9,5 +9,5 @@ public interface IUserService {
     public User saveUser(User user);
     public User findByIdUser(int id);
     public void deleteUser(int id);
-
+    List<User> searchUser(String filter) ;
 }
