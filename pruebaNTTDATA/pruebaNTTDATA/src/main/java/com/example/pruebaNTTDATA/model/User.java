@@ -1,5 +1,6 @@
 package com.example.pruebaNTTDATA.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @Table(name ="users")
 public class User {
     @Id
