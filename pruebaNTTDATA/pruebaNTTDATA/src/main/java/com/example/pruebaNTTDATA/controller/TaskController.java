@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 public class TaskController {
     private TaskServiceImpl taskService;
-
+    private TaskRepository taskRepository;
 
     public TaskController(TaskServiceImpl taskService) {
         this.taskService = taskService;

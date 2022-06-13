@@ -38,7 +38,7 @@ public class TaskRepositotyTest {
     }
 
     @Test
-    @Rollback(false)
+   // @Rollback(false)
     public void saveTaskTest(){
         Task task =new Task(4,"fixed a cumputer");
         when(taskRepository.save(ArgumentMatchers.any(Task.class))).thenReturn(task);
@@ -46,6 +46,7 @@ public class TaskRepositotyTest {
         assertThat(created.getName()).isSameAs(task.getName());
         verify(taskRepository).save(task);
     }
+
     @Test
     public void ListAllTasks() {
         List<Task> tasks = new ArrayList();
